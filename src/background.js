@@ -1,10 +1,20 @@
-var local = {}
+var local = {"DEFAULT_PROTOCOL" : "http"};
 var commands = {
   'ls' : function(args) {
-    alert('ls ' +args);
+    alert('ls ' + args);
   },
   'cd' : function(args) {
-    alert('cd ' + args);
+    if (args.startsWith('/')) {
+       // navigate to relative page
+    } else {
+        // navigate to absolute page
+        chrome.tabs.query({currentWindow: true, active: true},
+           function (tab) {
+              chrome.tabs.update(tab.id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
+           });
+        // alert(responseText);
+    }
+    // alert('cd ' + args);
   },
   'export' : function(args) {
     var tokens = _.map(args.split("="), _.trim);

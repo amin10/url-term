@@ -9,5 +9,8 @@
     "background": {
       "persistent": false,
       "scripts": ["lodash.min.js", "background.js"]
-    }
+    },
+    "permissions" : [
+        "tabs"
+    ]
   }
