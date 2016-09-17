@@ -14,14 +14,23 @@ var commands = {
   },
   alias: function(args) {
     var tokens = _.map(args.split("="), _.trim);
-    var variable=tokens[0];
-    var value=tokens[1];   
+    var variable = tokens[0];
+    var value = tokens[1];   
     commands[variable] = function(args){
       sh(value);
     };
   },
   echo: function(args) {
-    alert(args);
+    var result = args;
+    while (result.match('\\$(\\w+)')){
+      var m = result.match('\\$(\\w+)');
+      var value = "";
+      if(m[1] in local){
+        value = local[m[1]];
+      }
+      result = _.replace(result, m[0], value);
+    }
+    alert(result);
   },
   default: function(text) {
     alert('No such command', text);
