@@ -20,6 +20,9 @@ var commands = {
       sh(value);
     };
   },
+  echo: function(args) {
+    alert(args);
+  },
   default: function(text) {
     alert('No such command', text);
   }
