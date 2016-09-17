@@ -42,6 +42,15 @@ var commands = {
     }
     alert(result);
   },
+  source: function(args) {
+
+  },
+  man: function(args) {
+
+  },
+  grep: function(args) {
+
+  },
   default: function(text) {
     alert('No such command', text);
   }
