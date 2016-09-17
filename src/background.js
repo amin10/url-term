@@ -6,11 +6,15 @@ var commands = {
   'cd' : function(args) {
     if (args.startsWith('/')) {
        // navigate to relative page
+       chrome.tabs.query({currentWindow: true, active: true},
+          function (tabs) {
+             chrome.tabs.update(tabs[0].id, {url: tabs[0].url + args});
+          });
     } else {
         // navigate to absolute page
         chrome.tabs.query({currentWindow: true, active: true},
-           function (tab) {
-              chrome.tabs.update(tab.id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
+           function (tabs) {
+              chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
            });
         // alert(responseText);
     }
