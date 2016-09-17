@@ -12,8 +12,27 @@ var commands = {
     var value=tokens[1];
     local[variable] = value;
   },
+  alias: function(args) {
+    var tokens = _.map(args.split("="), _.trim);
+    var variable=tokens[0];
+    var value=tokens[1];   
+    commands[variable] = function(args){
+      sh(value);
+    };
+  },
   default: function(text) {
     alert('No such command', text);
+  }
+};
+
+var sh = function(text) {
+  var words = text.split(" ");
+  var cmd = words[0];
+  var args = _.join(words.slice(1), " ");
+  if (cmd in commands) {
+    commands[cmd](args);
+  } else {
+    commands['default'](text);
   }
 };
 
@@ -25,16 +44,4 @@ chrome.omnibox.onInputChanged.addListener(
       {content: text + " number two", description: "the second entry"}
     ]);
   });
-
-// This event is fired with the user accepts the input in the omnibox.
-chrome.omnibox.onInputEntered.addListener(
-  function(text) {
-    var words = text.split(" ");
-    var cmd = words[0];
-    var args = _.join(words.slice(1), " ");
-    if (cmd in commands) {
-      commands[cmd](args);
-    } else {
-      commands['default'](text);
-    }
-  });
+chrome.omnibox.onInputEntered.addListener(sh);
