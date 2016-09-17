@@ -1,0 +1,12 @@
+  {
+    "name": "Termibox",
+    "version": "1.0",
+    "omnibox": { "keyword" : "bash" },
+    "icons": {
+      "16": "16-full-color.png"
+    },
+    "background": {
+      "persistent": false,
+      "scripts": ["background.js"]
+    }
+  }
