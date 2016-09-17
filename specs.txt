@@ -4,6 +4,7 @@ ls <PATH>
 
 cd <PATH>
 - navigate to the webopage indicated by "PATH"
+- If path is relative, then should go to relative path
 - if PATH is not indicated, navigate to HOME_PAGE set by export command
 
 export <VAR_NAME>=<VAR_VALUE>
