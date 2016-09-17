@@ -8,6 +8,6 @@
     },
     "background": {
       "persistent": false,
-      "scripts": ["background.js"]
+      "scripts": ["lodash.min.js", "background.js"]
     }
   }

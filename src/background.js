@@ -21,9 +21,9 @@ chrome.omnibox.onInputEntered.addListener(
   function(text) {
     var cmd = text.split(" ")[0];
     var args = text.split(" ").slice(1);
-    if(cmd in commands){
+    if (cmd in commands) {
       commands[cmd](args);
-    }else {
+    } else {
       alert("No such command, "+cmd);
     }
   });
