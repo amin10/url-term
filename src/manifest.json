@@ -1,8 +1,8 @@
   {
     "manifest_version" : 2,
-    "name": "Termibox",
+    "name": "$",
     "version": "1.0",
-    "omnibox": { "keyword" : "bash" },
+    "omnibox": { "keyword" : "$" },
     "icons": {
       "16": "16-full-color.png"
     },

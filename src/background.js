@@ -11,13 +11,15 @@ var commands = {
     var variable=tokens[0];
     var value=tokens[1];
     local[variable] = value;
+  },
+  default: function(text) {
+    alert('No such command', text);
   }
 };
 
 chrome.omnibox.onInputChanged.addListener(
   function(text, suggest) {
     console.log('inputChanged: ' + text);
-    console.log(local);
     suggest([
       {content: text + " one", description: "the first one"},
       {content: text + " number two", description: "the second entry"}
@@ -33,6 +35,6 @@ chrome.omnibox.onInputEntered.addListener(
     if (cmd in commands) {
       commands[cmd](args);
     } else {
-      alert("No such command, "+cmd);
+      commands['default'](text);
     }
   });
