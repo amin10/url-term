@@ -1,9 +1,9 @@
 var commands = {
   'ls' : function(args) {
-    alert('ls', args);
+    alert('ls ' +args);
   },
   'cd' : function(args) {
-    alert('cd', args);
+    alert('cd ' + args);
   }
 };
 
@@ -21,5 +21,9 @@ chrome.omnibox.onInputEntered.addListener(
   function(text) {
     var cmd = text.split(" ")[0];
     var args = text.split(" ").slice(1);
-    commands[cmd](args);
+    if(cmd in commands){
+      commands[cmd](args);
+    }else {
+      alert("No such command, "+cmd);
+    }
   });
