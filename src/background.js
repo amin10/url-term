@@ -124,13 +124,14 @@ var commands = {
   },
   cat : function(args) {
     chrome.tabs.executeScript(
-      { 
+      {
         code: "var out= document.getElementsByTagName('html')[0].innerHTML;\
               document.open('text/html');\
               document.write(\"<html><head></head><body><textarea id='esc'></textarea></body></html>\");\
               document.close();\
               var esc = document.getElementById('esc');\
-              esc.textContent= out;"
+              esc.textContent= out;\
+              document.getElementsByTagName('html')[0].innerHTML = esc.innerHTML;"
       }, 
       function (out1) {
       }
