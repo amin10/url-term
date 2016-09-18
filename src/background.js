@@ -14,7 +14,7 @@ var commands = {
               base: ps1[0] // tab.url
             },
             success: function(data){
-              console.log(data);
+              console.log(data['result']);
             },
             dataType: "json"
           });
@@ -24,7 +24,12 @@ var commands = {
   },
   'cd' : function(args) {
     if (args === ''){
-      alert('HOME');
+      // cd takes you home
+      chrome.tabs.executeScript(
+        { 
+          code: "window.location.href='https://www.google.com/_/chrome/newtab';"
+        }, function(output) {}
+      );
     } else if (args.startsWith('/')) {
      // navigate to relative page
      chrome.tabs.query({currentWindow: true, active: true},
@@ -87,7 +92,7 @@ var commands = {
 
 var templates = {
   'ls' : ['ls'],
-  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd http://google.com'],
+  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd https://www.google.com'],
   'export' : ['export val=10'],
   'alias' : ['alias back=cd ..'],
   'echo' : ['echo Hello $name'],
@@ -141,6 +146,7 @@ chrome.omnibox.onInputChanged.addListener(
         };
       });
     }
+    console.log(suggestions);
     suggest(suggestions);
   });
 
