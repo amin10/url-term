@@ -23,7 +23,9 @@ var commands = {
     );
   },
   'cd' : function(args) {
-    if (args.startsWith('/')) {
+    if (args === ''){
+      alert('HOME');
+    } else if (args.startsWith('/')) {
      // navigate to relative page
      chrome.tabs.query({currentWindow: true, active: true},
         function (tabs) {
@@ -68,7 +70,6 @@ var commands = {
       }
       result = _.replace(result, m[0], value);
     }
-    console.log("hi");
   },
   source: function(args) {
 
@@ -82,6 +83,17 @@ var commands = {
   default: function(text) {
     alert('No such command', text);
   }
+};
+
+var templates = {
+  'ls' : ['ls'],
+  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd http://google.com'],
+  'export' : ['export val=10'],
+  'alias' : ['alias back=cd ..'],
+  'echo' : ['echo Hello $name'],
+  'source' : ['TODO'],
+  'man' : ['man'],
+  'grep' : ['TODO']
 };
 
 var sh = function(text) {
@@ -98,11 +110,38 @@ var sh = function(text) {
 
 chrome.omnibox.onInputChanged.addListener(
   function(text, suggest) {
-    console.log('inputChanged: ' + text);
-    suggest([
-      {content: text + " one", description: "the first one"},
-      {content: text + " number two", description: "the second entry"}
-    ]);
+    var cmds = Object.keys(commands);
+    var suggestions = [];
+
+    text = _.trim(text);
+    var words = text.split(" ");
+    var cmd = words[0];
+    var args = _.join(words.slice(1), " ");
+
+    if(args){ //User has finished writing the cmd
+      if (cmd in templates) {
+        _.each(templates[cmd], function(template){
+          if (_.startsWith(text, template)){
+            suggestions.push({
+              content: template,
+              description: template
+            });
+          }
+        });
+      }
+    } else { //User is still typing the cmd
+      _.each(templates, function(cmd_templates, cmd){
+        if (_.startsWith(cmd, text)){
+          _.each(cmd_templates, function(cmd_template){
+            suggestions.push({
+              content: cmd_template,
+              description: cmd_template
+            });
+          });
+        };
+      });
+    }
+    suggest(suggestions);
   });
 
 // This event is fired with the user accepts the input in the omnibox.
