@@ -3,12 +3,11 @@ block BodyContent
   h1
     | Termibox Manual
   script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js')
-  - var commands = [{'name':'ls<PATH>','description':"List all links in page indicated by PATH. If PATH is not indicated, list all links on the page."},{'name':'cd<PATH>','description':"Navigate to the webopage indicated by PATH. If PATH is relative, then navigate to relative path. If PATH is not indicated, navigate to HOME_PAGE set via export command."},{'name':'export<VAR_NAME>=<VAR_VALUE>','description':"Set VAR_NAME to VAR_VALUE."},{'name':'alias<EXISTING_COMMAND><NEW_COMMAND>','description':"Set NEW_COMMAND to have identical functionality as EXISTING_COMMAND."},{'name':'echo<TEXT>','description':"Display TEXT in pop-up."},{'name':'man<COMMAND>','description':"Redirect user to manual page. If COMMAND is provided, redirect user to manual page for COMMAND."},{'name':'grep<TOKEN>','description':"Search for TOKEN in current webpage."}];
+  - var commands = [{'name':'ls <PATH>','description':"List all links in page indicated by PATH. If PATH is not indicated, list all links on the page."},{'name':'cd <PATH>','description':"Navigate to the webopage indicated by PATH. If PATH is relative, then navigate to relative path. If PATH is not indicated, navigate to HOME_PAGE set via export command."},{'name':'export <VAR_NAME>=<VAR_VALUE>','description':"Set VAR_NAME to VAR_VALUE."},{'name':'alias <EXISTING_COMMAND><NEW_COMMAND>','description':"Set NEW_COMMAND to have identical functionality as EXISTING_COMMAND."},{'name':'echo <TEXT>','description':"Display TEXT in pop-up."},{'name':'man <COMMAND>','description':"Redirect user to manual page. If COMMAND is provided, redirect user to manual page for COMMAND."},{'name':'grep <TOKEN>','description':"Search for TOKEN in current webpage."}];
   
-  ul
-    each command in commands
+  each command in commands
+    ul
       li
-        h2
-          p #{command.name}
-        h3
-          p #{command.description}
+        strong #{command.name}
+          h3
+            p #{command.description}
