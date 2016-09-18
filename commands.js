@@ -24,7 +24,7 @@ var commands = [
     'description' : "Redirect user to manual page. If COMMAND is provided, redirect user to manual page for COMMAND."
   },
   {
-    'name' : 'cat <'<ELEMENT>' | ID | . | ''>',
+    'name' : "cat <'<ELEMENT>' | ID | . | ''>",
     'description' : "Displays html content of first occurrence of ELEMENT if provided. If ID provided, dispaly html content of element with id ID. If '.' or '' provided, display html content of page."
   }
   {
