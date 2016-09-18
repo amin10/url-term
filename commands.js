@@ -5,7 +5,7 @@ var commands = [
   },
   {
     'name' : 'cd <PATH>',
-    'description' : "Navigate to the webopage indicated by PATH. If PATH is relative, then navigate to relative path. If PATH is not indicated, navigate to HOME_PAGE set via export command."
+    'description' : "Navigate to the webopage indicated by PATH. If PATH is relative,  navigate to relative path. If PATH is not indicated, navigate to HOME_PAGE set via export command."
   },
   {
     'name' : 'export <VAR_NAME>=<VAR_VALUE>',
@@ -23,6 +23,10 @@ var commands = [
     'name' : 'man <COMMAND>',
     'description' : "Redirect user to manual page. If COMMAND is provided, redirect user to manual page for COMMAND."
   },
+  {
+    'name' : 'cat <'<ELEMENT>' | ID | . | ''>',
+    'description' : "Displays html content of first occurrence of ELEMENT if provided. If ID provided, dispaly html content of element with id ID. If '.' or '' provided, display html content of page."
+  }
   {
     'name' : 'grep <TOKEN>',
     'description' : "Search for TOKEN in current webpage."
