@@ -29,6 +29,10 @@ def find_related_links(body, seen = {}):
 def index():
     return render_template('index.jade')
 
+@app.route('/test')
+def test():
+    return render_template('test.jade')
+
 @app.route('/find_related', methods=['POST'])
 @cross_origin()
 def find_related():
