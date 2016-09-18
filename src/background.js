@@ -1,5 +1,20 @@
 var DEFAULT_PROTOCOL = "http";
 var local = {"HOST" : "TODO"};
+
+var swal = function(o){
+  chrome.tabs.executeScript({
+    code:"var styles = \"@import url('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css');\"; \
+          var newSS=document.createElement('link'); \
+          newSS.rel='stylesheet'; \
+          newSS.href='data:text/css,'+escape(styles); \
+          document.getElementsByTagName('head')[0].appendChild(newSS); \
+          fetch('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js') \
+          .then(response => response.text()) \
+          .then(text => eval(text)) \
+          .then(() => { swal("+JSON.stringify(o)+") })"
+  });
+};
+
 var commands = {
   'ls' : function(args) {
     chrome.tabs.executeScript(
@@ -15,7 +30,12 @@ var commands = {
               base: ps1[0] // tab.url
             },
             success: function(data){
-              console.log(data['result']);
+              var urls = data['result'];
+              swal({
+                'title' : 'hey',
+                'text': '<textarea cols=50>'+JSON.stringify(urls)+'</textarea>',
+                'html' : true
+              });
             },
             dataType: "json"
           });
