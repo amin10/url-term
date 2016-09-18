@@ -1,21 +1,5 @@
-var local = {"DEFAULT_PROTOCOL" : "http"};
-
-var entityMap = {
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': '&quot;',
-  "'": '&#39;',
-  "/": '&#x2F;'
-};
-
-// http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
-function escapeHtml(string) {
-  return String(string).replace(/[&<>"'\/]/g, function (s) {
-    return entityMap[s];
-  });
-}
-
+var DEFAULT_PROTOCOL = "http";
+var local = {"HOST" : "TODO"};
 var commands = {
   'ls' : function(args) {
     chrome.tabs.executeScript(
@@ -64,7 +48,7 @@ var commands = {
       // navigate to absolute page
       chrome.tabs.query({currentWindow: true, active: true},
          function (tabs) {
-            chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
+            chrome.tabs.update(tabs[0].id, {url: DEFAULT_PROTOCOL + '://' + args});
          });
     }
   },
@@ -95,10 +79,15 @@ var commands = {
     alert(result);
   },
   man : function(args) {
-    chrome.tabs.query({currentWindow: true, active: true},
+    if (args == '') {
+      console.log("args = '': " + true);
+      chrome.tabs.query({currentWindow: true, active: true},
       function (tabs) {
-        chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + "/127.0.0.1:5000/templates/index.jade"});
+        chrome.tabs.update(tabs[0].id, {url: DEFAULT_PROTOCOL + '://' + local["HOST"]});
       });
+    } else {
+
+    }
   },
   grep : function(args) {
 
