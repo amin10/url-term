@@ -51,13 +51,13 @@ var commands = {
          });
     }
   },
-  'export' : function(args) {
+  export : function(args) {
     var tokens = _.map(args.split("="), _.trim);
     var variable=tokens[0];
     var value=tokens[1];
     local[variable] = value;
   },
-  alias: function(args) {
+  alias : function(args) {
     var tokens = _.map(args.split("="), _.trim);
     var variable = tokens[0];
     var value = tokens[1];   
@@ -65,7 +65,7 @@ var commands = {
       sh(value);
     };
   },
-  echo: function(args) {
+  echo : function(args) {
     var result = args;
     while (result.match('\\$(\\w+)')){
       var m = result.match('\\$(\\w+)');
@@ -76,16 +76,19 @@ var commands = {
       result = _.replace(result, m[0], value);
     }
   },
-  source: function(args) {
+  source : function(args) {
 
   },
-  man: function(args) {
+  man : function(args) {
+    chrome.tabs.query({currentWindow: true, active: true},
+      function (tabs) {
+        chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + "/127.0.0.1:5000/templates/index.jade"});
+      });
+  },
+  grep : function(args) {
 
   },
-  grep: function(args) {
-
-  },
-  default: function(text) {
+  default : function(text) {
     alert('No such command', text);
   }
 };
