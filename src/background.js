@@ -92,7 +92,7 @@ var commands = {
 
 var templates = {
   'ls' : ['ls'],
-  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd https://www.google.com'],
+  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd www.google.com'],
   'export' : ['export val=10'],
   'alias' : ['alias back=cd ..'],
   'echo' : ['echo Hello $name'],
