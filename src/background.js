@@ -95,6 +95,21 @@ var commands = {
   grep : function(args) {
 
   },
+  cat : function(args) {
+
+  },
+  pwd : function(args) {
+    chrome.tabs.executeScript(
+      { 
+        code: "window.location.href;"
+      }, function(output) {
+        alert(output);
+      }
+    );
+  },
+  ln : function(args) {
+
+  },
   default : function(text) {
     alert('No such command', text);
   }
@@ -102,13 +117,16 @@ var commands = {
 
 var templates = {
   'ls' : ['ls'],
-  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd https://www.google.com'],
+  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd www.google.com'],
   'export' : ['export val=10'],
   'alias' : ['alias back=cd ..'],
   'echo' : ['echo Hello $name'],
   'source' : ['TODO'],
   'man' : ['man'],
-  'grep' : ['TODO']
+  'grep' : [], // TODO
+  'cat' : ['cat .'], //TODO
+  'pwd' : ['pwd'],
+  'ln' : [] // TODO
 };
 
 var sh = function(text) {
