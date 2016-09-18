@@ -108,7 +108,7 @@ var commands = {
     } else {
 
     }
-  }, // xkcd reference
+  },
   grep : function(args) {
     var urls = [];
     args = _.lowerCase(args);
@@ -150,7 +150,7 @@ var commands = {
         'https://dl.dropboxusercontent.com/s/amh9fovm4xoowzg/16.jpg?dl=0',
         'https://dl.dropboxusercontent.com/s/8pfb7dfbgpn1l0q/28.jpg?dl=0'];
     }
-    var imgs = _.join(_.map(urls, function(url){
+    var imgs = _.join(_.map(_.slice(urls, -3), function(url){
       return "<img style='width:100px;height:100px;' src='"+url+"'></img>";
     }), "");
     swal({
@@ -205,6 +205,13 @@ var commands = {
   },
   ln : function(args) {
 
+  },
+  xkcd : function(i) {
+    chrome.tabs.executeScript(
+      { 
+        code: "window.location.href='https://xkcd.com/'"+i
+      }, function(output) {}
+    );    
   },
   default : function(text) {
     alert('No such command', text);
