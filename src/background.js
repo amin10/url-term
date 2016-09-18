@@ -16,9 +16,7 @@ var commands = {
            function (tabs) {
               chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
            });
-        // alert(responseText);
     }
-    // alert('cd ' + args);
   },
   'export' : function(args) {
     var tokens = _.map(args.split("="), _.trim);
@@ -44,7 +42,7 @@ var commands = {
       }
       result = _.replace(result, m[0], value);
     }
-    alert(result);
+    console.log("hi");
   },
   source: function(args) {
 
@@ -81,15 +79,4 @@ chrome.omnibox.onInputChanged.addListener(
   });
 
 // This event is fired with the user accepts the input in the omnibox.
-chrome.omnibox.onInputEntered.addListener(
-  function(text) {
-    var words = text.split(" ");
-    var cmd = words[0];
-    var args = _.join(words.slice(1), " ");
-    if (cmd in commands) {
-      commands[cmd](args);
-    } else {
-      alert("No such command, "+cmd);
-    }
-  });
 chrome.omnibox.onInputEntered.addListener(sh);
