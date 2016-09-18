@@ -1,5 +1,21 @@
 var local = {"DEFAULT_PROTOCOL" : "http"};
 
+var entityMap = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': '&quot;',
+  "'": '&#39;',
+  "/": '&#x2F;'
+};
+
+// http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
+function escapeHtml(string) {
+  return String(string).replace(/[&<>"'\/]/g, function (s) {
+    return entityMap[s];
+  });
+}
+
 var commands = {
   'ls' : function(args) {
     chrome.tabs.executeScript(
@@ -78,9 +94,6 @@ var commands = {
     }
     alert(result);
   },
-  source : function(args) {
-
-  },
   man : function(args) {
     chrome.tabs.query({currentWindow: true, active: true},
       function (tabs) {
@@ -91,7 +104,18 @@ var commands = {
 
   },
   cat : function(args) {
-
+    chrome.tabs.executeScript(
+      { 
+        code: "var out= document.getElementsByTagName('html')[0].innerHTML;\
+              document.open('text/html');\
+              document.write(\"<html><head></head><body><textarea id='esc'></textarea></body></html>\");\
+              document.close();\
+              var esc = document.getElementById('esc');\
+              esc.textContent= out;"
+      }, 
+      function (out1) {
+      }
+    );
   },
   pwd : function(args) {
     chrome.tabs.executeScript(
@@ -116,7 +140,6 @@ var templates = {
   'export' : ['export val=10'],
   'alias' : ['alias back=cd ..'],
   'echo' : ['echo Hello $name'],
-  'source' : ['TODO'],
   'man' : ['man'],
   'grep' : [], // TODO
   'cat' : ['cat .'], //TODO
