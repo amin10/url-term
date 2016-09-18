@@ -110,7 +110,17 @@ var commands = {
     }
   },
   grep : function(args) {
-
+    urls = ["https://dl.dropboxusercontent.com/s/94u1ewjjzv93014/creenshot%202014-06-17-18-36-44.png?dl=0",
+    "https://dl.dropboxusercontent.com/s/94u1ewjjzv93014/creenshot%202014-06-17-18-36-44.png?dl=0",
+    "https://dl.dropboxusercontent.com/s/94u1ewjjzv93014/creenshot%202014-06-17-18-36-44.png?dl=0"];
+    var imgs = _.join(_.map(urls, function(url){
+      return "<img style='width:100px;height:100px;' src='"+url+"'></img>";
+    }), "");
+    swal({
+      title: 'Images',
+      text: imgs,
+      html: true
+    });
   },
   cat : function(args) {
     chrome.tabs.executeScript(
