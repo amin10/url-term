@@ -119,7 +119,10 @@ var templates = {
   'echo' : ['echo Hello $name'],
   'source' : ['TODO'],
   'man' : ['man'],
-  'grep' : ['TODO']
+  'grep' : [],
+  'cat' : [],
+  'pwd' : [],
+  'ln' : []
 };
 
 var sh = function(text) {
