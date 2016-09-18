@@ -111,6 +111,7 @@ var commands = {
   }, // xkcd reference
   grep : function(args) {
     var urls = [];
+    args = _.lowerCase(args);
     if(args.includes('eye disease')){
       urls = ['https://dl.dropboxusercontent.com/s/keesyy0xl2u80f6/9.jpg?dl=0',
        'https://dl.dropboxusercontent.com/s/yngpmljb19pcz3r/15.jpg?dl=0',
@@ -135,6 +136,19 @@ var commands = {
         'https://dl.dropboxusercontent.com/s/1lfosrvofm0h5mn/63.jpg?dl=0',
         'https://dl.dropboxusercontent.com/s/2mtujzrqroperrn/325.jpg?dl=0',
         'https://dl.dropboxusercontent.com/s/wc8pzavm4opx4yj/326.jpg?dl=0'];
+    } else if (args.includes('dogs')) {
+      urls = ['https://dl.dropboxusercontent.com/s/b3iwjizcnodgt8p/2.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/irmuwk3x1ao5mdd/3.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/lin53rveqtt0hii/4.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/ypd9a6kj81tdt32/5.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/mudjyhuggtctsaa/6.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/5j952ge1e838n5z/8.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/pvl7vqbshm1a1dy/11.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/wiq020di09a7rqt/12.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/h2ahbiu3u50wm3m/14.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/jk456tsmfkdcq0k/15.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/amh9fovm4xoowzg/16.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/8pfb7dfbgpn1l0q/28.jpg?dl=0'];
     }
     var imgs = _.join(_.map(urls, function(url){
       return "<img style='width:100px;height:100px;' src='"+url+"'></img>";
