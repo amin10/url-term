@@ -29,6 +29,6 @@ var commands = [
   }
   {
     'name' : 'grep <TOKEN>',
-    'description' : "Search for TOKEN in current webpage."
+    'description' : "Creates and downloads a database of images about <TOKEN>"
   }
 ];

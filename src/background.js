@@ -29,13 +29,15 @@ var templates = {
   'export' : ['export val=10'],
   'alias' : ['alias back=cd ..'],
   'echo' : ['echo Hello $name'],
-  'man' : ['man'],
+  'man' : ['man', 'man cat'],
   'grep' : ['grep dogs'],
   'cat' : ['cat .', 'cat <head>', 'cat myDiv'],
   'pwd' : ['pwd'],
   'ln' : ['ln'],
   'xkcd' : ['xkcd', 'xkcd 353'],
-  'hackmit' : ['hackmit']
+  'hackmit' : ['hackmit'],
+  'slither' : ['slither'],
+  'cmake' : ['cmake', 'cmake --opt', 'cmake --debug']
 };
 
 var commands = {
@@ -118,15 +120,19 @@ var commands = {
     }
     alert(result);
   },
-  man : function(args) {
-    if (args == '') {
-      console.log("args = '': " + true);
-      chrome.tabs.query({currentWindow: true, active: true},
-      function (tabs) {
-        chrome.tabs.update(tabs[0].id, {url: DEFAULT_PROTOCOL + '://' + local["HOST"]});
-      });
+  man : function(cmd) {
+    if (cmd in templates){
+        return swal({
+          title: "$ man "+cmd,
+          text: "Examples: "+JSON.stringify(templates[cmd])
+        });
+    } else if (cmd == '') {
+      redirect('http://localhost:5000/test');
     } else {
-
+      return swal({
+        title: "$ man "+cmd,
+        text: "No manual entry found for "+cmd
+      });
     }
   },
   grep : function(args) {
@@ -229,8 +235,14 @@ var commands = {
   xkcd : function(i) {
     redirect('https://xkcd.com/'+i);
   },
+  slither : function(args) {
+    redirect('http://slither.io');
+  },
   hackmit : function(args) {
     redirect('http://dayof.hackmit.org/');
+  },
+  cmake : function(args) {
+    sh('xkcd 303');
   },
   default : function(text) {
     alert('No such command', text);
