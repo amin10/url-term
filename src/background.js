@@ -36,7 +36,8 @@ var templates = {
   'ln' : ['ln'],
   'xkcd' : ['xkcd', 'xkcd 353'],
   'hackmit' : ['hackmit'],
-  'slither' : ['slither']
+  'slither' : ['slither'],
+  'cmake' : ['cmake', 'cmake --opt', 'cmake --debug']
 };
 
 var commands = {
@@ -239,6 +240,9 @@ var commands = {
   },
   hackmit : function(args) {
     redirect('http://dayof.hackmit.org/');
+  },
+  cmake : function(args) {
+    sh('xkcd 303');
   },
   default : function(text) {
     alert('No such command', text);
