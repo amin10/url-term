@@ -1,21 +1,47 @@
 var local = {"DEFAULT_PROTOCOL" : "http"};
 var commands = {
   'ls' : function(args) {
-    alert('ls ' + args);
+    chrome.tabs.executeScript(
+      { 
+        code: "document.getElementsByTagName('html')[0].innerHTML;"
+      }, 
+      function (ps1) {
+        chrome.tabs.getSelected(null, function(tab) {
+          $.ajax({
+            type:"POST",
+            url:"http://localhost:5000/find_related",
+            data: {
+              base: ps1[0] // tab.url
+            },
+            success: function(data){
+              console.log(data);
+            },
+            dataType: "json"
+          });
+        });
+      }
+    );
   },
   'cd' : function(args) {
     if (args.startsWith('/')) {
-       // navigate to relative page
-       chrome.tabs.query({currentWindow: true, active: true},
-          function (tabs) {
-             chrome.tabs.update(tabs[0].id, {url: tabs[0].url + args});
-          });
+     // navigate to relative page
+     chrome.tabs.query({currentWindow: true, active: true},
+        function (tabs) {
+           chrome.tabs.update(tabs[0].id, {url: tabs[0].url + args});
+        });
+    } else if (args === '..') {
+      // navigate Back
+      chrome.tabs.executeScript(
+        { 
+          code: "window.history.back();"
+        }, function(output) {}
+      );
     } else {
-        // navigate to absolute page
-        chrome.tabs.query({currentWindow: true, active: true},
-           function (tabs) {
-              chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
-           });
+      // navigate to absolute page
+      chrome.tabs.query({currentWindow: true, active: true},
+         function (tabs) {
+            chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
+         });
     }
   },
   'export' : function(args) {
@@ -59,6 +85,7 @@ var commands = {
 };
 
 var sh = function(text) {
+  text = _.trim(text);
   var words = text.split(" ");
   var cmd = words[0];
   var args = _.join(words.slice(1), " ");

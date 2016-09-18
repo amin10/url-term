@@ -11,6 +11,8 @@
       "scripts": ["jquery.min.js", "lodash.min.js", "background.js"]
     },
     "permissions" : [
-        "tabs"
+      "tabs",
+      "http://*/",
+      "https://*/"
     ]
   }
