@@ -3,7 +3,7 @@ block BodyContent
     section#about.bg-primary
       .container
         .row
-          .col-lg-8.col-lg-offset-2.text-center
+          .col-lg-8.col-lg-12.text-center
             h2.section-heading Welcome to Termibox!
             hr.light
             p.text-faded
@@ -14,53 +14,43 @@ block BodyContent
             .col-lg-12.text-center
               h2.section-heading Command Manual
               hr.primary
-      .container
-        center
           .row
-            center
             .col-lg-3.col-md-12.text-center
-              .service-box
+            .service-box
                 h3 ls PATH
                 p.text-muted List all links in page indicated by PATH. If PATH is not indicated, list all links on the page.
-      .container
-        .row  
-          .col-lg-3.col-md-12.text-center
+          .row  
+            .col-lg-3.col-md-12.text-center
             .service-box
               h3 cd PATH
               p.text-muted Navigate to the webopage indicated by PATH. If PATH is relative,  navigate to relative path. If PATH is not indicated, navigate to HOME_PAGE set via export command.
-      .container
-        .row  
-          .col-lg-3.col-md-12.text-center
+          .row  
+            .col-lg-3.col-md-12.text-center
             .service-box
               h3 export VAR_NAME=VAR_VALUE
               p.text-muted Set VAR_NAME to VAR_VALUE.
-      .container
-        .row      
-          .col-lg-3.col-md-12.text-center
+          .row      
+            .col-lg-3.col-md-12.text-center
             .service-box
               h3 alias EXISTING_COMMAND NEW_COMMAND
               p.text-muted Set NEW_COMMAND to have identical functionality as EXISTING_COMMAND.
-      .container
-        .row      
-          .col-lg-3.col-md-12.text-center
+          .row      
+            .col-lg-3.col-md-12.text-center
             .service-box
               h3 echo TEXT
               p.text-muted Display TEXT in pop-up.
-      .container
-        .row      
-          .col-lg-3.col-md-12.text-center
+          .row      
+            .col-lg-3.col-md-12.text-center
             .service-box
               h3 man COMMAND
               p.text-muted Redirect user to manual page. If COMMAND is provided, redirect user to manual page for COMMAND.
-      .container
-        .row      
-          .col-lg-3.col-md-12.text-center
+          .row      
+            .col-lg-3.col-md-12.text-center
             .service-box
               h3 cat ELEMENT | ID | . | ''
               p.text-muted Displays html content of first occurrence of ELEMENT if provided. If ID provided, dispaly html content of element with id ID. If '.' or '' provided, display html content of page.
-      .container
-        .row      
-          .col-lg-3.col-md-12.text-center
+          .row      
+            .col-lg-3.col-md-12.text-center
             .service-box
               h3 grep TOKEN
               p.text-muted Creates and downloads a database of images about TOKEN.
