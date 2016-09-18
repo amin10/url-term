@@ -1,4 +1,6 @@
 var local = {"DEFAULT_PROTOCOL" : "http"};
+
+
 var commands = {
   'ls' : function(args) {
     chrome.tabs.executeScript(
@@ -75,6 +77,7 @@ var commands = {
       }
       result = _.replace(result, m[0], value);
     }
+    alert(result);
   },
   source : function(args) {
 
@@ -86,6 +89,21 @@ var commands = {
       });
   },
   grep : function(args) {
+
+  },
+  cat : function(args) {
+
+  },
+  pwd : function(args) {
+    chrome.tabs.executeScript(
+      { 
+        code: "window.location.href;"
+      }, function(output) {
+        alert(output);
+      }
+    );
+  },
+  ln : function(args) {
 
   },
   default : function(text) {
