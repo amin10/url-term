@@ -1,4 +1,5 @@
-var local = {"DEFAULT_PROTOCOL" : "http"};
+var DEFAULT_PROTOCOL = "http";
+var local = {"HOST" : "TODO"};
 var commands = {
   'ls' : function(args) {
     chrome.tabs.executeScript(
@@ -47,7 +48,7 @@ var commands = {
       // navigate to absolute page
       chrome.tabs.query({currentWindow: true, active: true},
          function (tabs) {
-            chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + '://' + args});
+            chrome.tabs.update(tabs[0].id, {url: DEFAULT_PROTOCOL + '://' + args});
          });
     }
   },
@@ -75,15 +76,21 @@ var commands = {
       }
       result = _.replace(result, m[0], value);
     }
+    alert(result);
   },
   source : function(args) {
 
   },
   man : function(args) {
-    chrome.tabs.query({currentWindow: true, active: true},
+    if (args == '') {
+      console.log("args = '': " + true);
+      chrome.tabs.query({currentWindow: true, active: true},
       function (tabs) {
-        chrome.tabs.update(tabs[0].id, {url: local["DEFAULT_PROTOCOL"] + "/127.0.0.1:5000/templates/index.jade"});
+        chrome.tabs.update(tabs[0].id, {url: DEFAULT_PROTOCOL + '://' + local["HOST"]});
       });
+    } else {
+
+    }
   },
   grep : function(args) {
 
