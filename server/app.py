@@ -37,7 +37,7 @@ def find_related_links(body, seen = {}):
 
 @app.route('/')
 def index():
-    return render_template('index.jade')
+    return render_template('test.jade')
 
 @app.route('/ls')
 def ls_manual():
