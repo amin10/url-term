@@ -1,6 +1,5 @@
 var local = {"DEFAULT_PROTOCOL" : "http"};
 
-
 var commands = {
   'ls' : function(args) {
     chrome.tabs.executeScript(
@@ -119,10 +118,10 @@ var templates = {
   'echo' : ['echo Hello $name'],
   'source' : ['TODO'],
   'man' : ['man'],
-  'grep' : [],
-  'cat' : [],
-  'pwd' : [],
-  'ln' : []
+  'grep' : [], // TODO
+  'cat' : ['cat .'], //TODO
+  'pwd' : ['pwd'],
+  'ln' : [] // TODO
 };
 
 var sh = function(text) {
