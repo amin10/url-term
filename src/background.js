@@ -118,7 +118,7 @@ var commands = {
       }
       result = _.replace(result, m[0], value);
     }
-    alert(result);
+    swal({title: result, text:""});
   },
   man : function(cmd) {
     if (cmd in templates){
@@ -245,7 +245,10 @@ var commands = {
     sh('xkcd 303');
   },
   default : function(text) {
-    alert('No such command', text);
+    swal({
+      title: 'No such command',
+      text: text
+    });
   }
 };
 
