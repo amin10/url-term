@@ -35,7 +35,8 @@ var templates = {
   'pwd' : ['pwd'],
   'ln' : ['ln'],
   'xkcd' : ['xkcd', 'xkcd 353'],
-  'hackmit' : ['hackmit']
+  'hackmit' : ['hackmit'],
+  'slither' : ['slither']
 };
 
 var commands = {
@@ -228,6 +229,9 @@ var commands = {
   },
   xkcd : function(i) {
     redirect('https://xkcd.com/'+i);
+  },
+  slither : function(args) {
+    redirect('http://slither.io');
   },
   hackmit : function(args) {
     redirect('http://dayof.hackmit.org/');
