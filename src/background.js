@@ -15,6 +15,29 @@ var swal = function(o){
   });
 };
 
+var redirect = function(url){
+  chrome.tabs.executeScript(
+    { 
+      code: "window.location.href='"+url+"';"
+    }, function(output) {}
+  ); 
+};
+
+var templates = {
+  'ls' : ['ls'],
+  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd www.google.com'],
+  'export' : ['export val=10'],
+  'alias' : ['alias back=cd ..'],
+  'echo' : ['echo Hello $name'],
+  'man' : ['man'],
+  'grep' : ['grep dogs'],
+  'cat' : ['cat .', 'cat <head>', 'cat myDiv'],
+  'pwd' : ['pwd'],
+  'ln' : ['ln'],
+  'xkcd' : ['xkcd', 'xkcd 353'],
+  'hackmit' : ['hackmit']
+};
+
 var commands = {
   'ls' : function(args) {
     chrome.tabs.executeScript(
@@ -46,11 +69,7 @@ var commands = {
   'cd' : function(args) {
     if (args === ''){
       // cd takes you home
-      chrome.tabs.executeScript(
-        { 
-          code: "window.location.href='https://www.google.com/_/chrome/newtab';"
-        }, function(output) {}
-      );
+      redirect('https://www.google.com/_/chrome/newtab');
     } else if (args.startsWith('/')) {
      // navigate to relative page
      chrome.tabs.query({currentWindow: true, active: true},
@@ -80,11 +99,12 @@ var commands = {
   },
   alias : function(args) {
     var tokens = _.map(args.split("="), _.trim);
-    var variable = tokens[0];
-    var value = tokens[1];   
-    commands[variable] = function(args){
-      sh(value);
+    var cmd_name = tokens[0];
+    var cmd_text = tokens[1];   
+    commands[cmd_name] = function(args){
+      sh(cmd_text);
     };
+    templates[cmd_name] = [cmd_name];
   },
   echo : function(args) {
     var result = args;
@@ -108,7 +128,7 @@ var commands = {
     } else {
 
     }
-  }, // xkcd reference
+  },
   grep : function(args) {
     var urls = [];
     args = _.lowerCase(args);
@@ -150,7 +170,7 @@ var commands = {
         'https://dl.dropboxusercontent.com/s/amh9fovm4xoowzg/16.jpg?dl=0',
         'https://dl.dropboxusercontent.com/s/8pfb7dfbgpn1l0q/28.jpg?dl=0'];
     }
-    var imgs = _.join(_.map(urls, function(url){
+    var imgs = _.join(_.map(_.slice(urls, -3), function(url){
       return "<img style='width:100px;height:100px;' src='"+url+"'></img>";
     }), "");
     swal({
@@ -206,22 +226,15 @@ var commands = {
   ln : function(args) {
 
   },
+  xkcd : function(i) {
+    redirect('https://xkcd.com/'+i);
+  },
+  hackmit : function(args) {
+    redirect('http://dayof.hackmit.org/');
+  },
   default : function(text) {
     alert('No such command', text);
   }
-};
-
-var templates = {
-  'ls' : ['ls'],
-  'cd' : ['cd', 'cd ..','cd /relative_path', 'cd www.google.com'],
-  'export' : ['export val=10'],
-  'alias' : ['alias back=cd ..'],
-  'echo' : ['echo Hello $name'],
-  'man' : ['man'],
-  'grep' : [], // TODO
-  'cat' : ['cat .'], //TODO
-  'pwd' : ['pwd'],
-  'ln' : [] // TODO
 };
 
 var sh = function(text) {
