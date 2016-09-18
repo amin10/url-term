@@ -1,0 +1,12 @@
+extends ./layout.jade
+block BodyContent
+  h1
+    | Termibox Manual
+  script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js')
+
+  .container
+    .row      
+      .col-lg-3.col-md-12.text-center
+        .service-box
+          h3 echo TEXT
+          p.text-muted Display TEXT in pop-up.

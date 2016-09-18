@@ -44,31 +44,31 @@ def ls_manual():
     return render_template('ls.jade')
 
 @app.route('/cd')
-def cd_manual(name):
+def cd_manual():
     return render_template('cd.jade')
 
 @app.route('/export')
-def export_manual(name):
+def export_manual():
     return render_template('export.jade')
 
 @app.route('/alias')
-def alias_manual(name):
+def alias_manual():
     return render_template('alias.jade')
 
 @app.route('/echo')
-def echo_manual(name):
+def echo_manual():
     return render_template('echo.jade')
 
 @app.route('/man')
-def man_manual(name):
+def man_manual():
     return render_template('man.jade')
 
 @app.route('/cat')
-def cat_manual(name):
+def cat_manual():
     return render_template('cat.jade')
 
 @app.route('/grep')
-def grep_manual(name):
+def grep_manual():
     return render_template('grep.jade')
 
 @app.route('/test')

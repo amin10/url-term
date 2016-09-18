@@ -1,0 +1,13 @@
+extends ./layout.jade
+block BodyContent
+  h1
+    | Termibox Manual
+  script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js')
+  - var command = {'name':'ls <PATH>','description':"List all links in page indicated by PATH. If PATH is not indicated, list all links on the page."};
+
+  .container
+    .row  
+      .col-lg-3.col-md-12.text-center
+        .service-box
+          h3 cd PATH
+          p.text-muted Navigate to the webopage indicated by PATH. If PATH is relative,  navigate to relative path. If PATH is not indicated, navigate to HOME_PAGE set via export command.
