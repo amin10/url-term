@@ -8,11 +8,14 @@
     },
     "background": {
       "persistent": false,
-      "scripts": ["bower_components/jquery/dist/jquery.min.js", "bower_components/lodash/dist/lodash.min.js", "background.js"]
+      "scripts": ["bower_components/jquery/dist/jquery.min.js",
+                  "bower_components/lodash/dist/lodash.min.js",
+                  "background.js"]
     },
     "permissions" : [
       "tabs",
       "http://*/",
-      "https://*/"
+      "https://*/",
+      "downloads"
     ]
   }

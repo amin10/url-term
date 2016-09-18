@@ -71,6 +71,10 @@ def cat_manual(name):
 def grep_manual(name):
     return render_template('grep.jade')
 
+@app.route('/test')
+def test():
+    return render_template('test.jade')
+
 @app.route('/find_related', methods=['POST'])
 @cross_origin()
 def find_related():
